@@ -8,7 +8,6 @@ if(process.env.NODE_ENV !== "production")
 
 const express = require('express')
 const path = require('path')
-const port = 3000;
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 
@@ -179,6 +178,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error', { err });
 })
 
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
