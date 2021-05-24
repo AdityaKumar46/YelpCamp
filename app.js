@@ -35,7 +35,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-dbUrl = process.env.DB_URL;
+dbUrl = process.env.DB_URL || 'mongodb://localhost/yelp-camp';
 
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 
