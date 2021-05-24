@@ -27,7 +27,6 @@ module.exports.createCampground = async(req, res, next) => {
     campground.images = req.files.map(f => ({url: f.path, filename: f.filename}));
     campground.author = req.user._id;
     await campground.save();
-    console.log(campground);
     req.flash('success', 'Successfully made a new campground!');
     res.redirect(`/campgrounds/${campground._id}`)
 }
@@ -45,14 +44,11 @@ module.exports.showCampground = async(req, res) => {
       req.flash('error', 'cannot find that campground');
       res.redirect('/campgrounds');
     }
-    console.log(campground)
-    console.log(campground.geometry.coordinates)
     res.render('campgrounds/show', {campground});
 }
 
 module.exports.renderEditForm = async(req, res) => {
 
-  console.log(req.params.id)
     const campground = await Campground.findById(req.params.id);
     if(!campground)
     {
@@ -64,7 +60,6 @@ module.exports.renderEditForm = async(req, res) => {
 
 module.exports.updateCampground = async (req, res) => {
 
-      console.log(req.body)
       const { id } = req.params;
       const camp = await Campground.findById(id)
       const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});
